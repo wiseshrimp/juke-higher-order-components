@@ -2,12 +2,14 @@
 
 import React from 'react';
 import { Link } from 'react-router';
+import FormContainer from '../form/FormContainer';
 
 export default function (props) {
   const artists = props.artists;
-  
+
   return (
     <div>
+      <FormContainer />
       <h3>Artists</h3>
       <div className="list-group">
         {
