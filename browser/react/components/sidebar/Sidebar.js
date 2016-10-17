@@ -13,6 +13,9 @@ export default function () {
       <section>
         <Link to="/artists" activeClassName="menu-item active" className="menu-item">ARTISTS</Link>
       </section>
+      <section>
+        <Link to="/playlist" activeClassName="menu-item active" className="menu-item">PLAYLISTS</Link>
+      </section>
     </sidebar>
   );
 }

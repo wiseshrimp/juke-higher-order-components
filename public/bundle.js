@@ -24575,6 +24575,10 @@
 	
 	var _ArtistSongs2 = _interopRequireDefault(_ArtistSongs);
 	
+	var _Playlists = __webpack_require__(300);
+	
+	var _Playlists2 = _interopRequireDefault(_Playlists);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = function () {
@@ -24593,7 +24597,8 @@
 	        { path: 'artists/:id', component: _ArtistContainer2.default, onEnter: _enterHooks.onArtistsEnter },
 	        _react2.default.createElement(_reactRouter.Route, { path: 'albums', component: _ArtistAlbums2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'songs', component: _ArtistSongs2.default })
-	      )
+	      ),
+	      _react2.default.createElement(_reactRouter.Route, { path: 'playlist', component: _Playlists2.default })
 	    )
 	  );
 	};
@@ -30292,6 +30297,15 @@
 	        { to: '/artists', activeClassName: 'menu-item active', className: 'menu-item' },
 	        'ARTISTS'
 	      )
+	    ),
+	    _react2.default.createElement(
+	      'section',
+	      null,
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/playlist', activeClassName: 'menu-item active', className: 'menu-item' },
+	        'PLAYLISTS'
+	      )
 	    )
 	  );
 	};
@@ -30879,10 +30893,7 @@
 	  function Form(props) {
 	    _classCallCheck(this, Form);
 	
-	    var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
-	
-	    console.log(props);
-	    return _this;
+	    return _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
 	  }
 	
 	  _createClass(Form, [{
@@ -31100,6 +31111,209 @@
 	var _SongsContainer2 = _interopRequireDefault(_SongsContainer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 297 */,
+/* 298 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _PlaylistConstructor = __webpack_require__(299);
+	
+	var _PlaylistConstructor2 = _interopRequireDefault(_PlaylistConstructor);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PlaylistForm = function (_Component) {
+	   _inherits(PlaylistForm, _Component);
+	
+	   function PlaylistForm(props) {
+	      _classCallCheck(this, PlaylistForm);
+	
+	      var _this = _possibleConstructorReturn(this, (PlaylistForm.__proto__ || Object.getPrototypeOf(PlaylistForm)).call(this, props));
+	
+	      _this.state = {
+	         currentPlaylistName: '',
+	         playlists: []
+	      };
+	
+	      _this.onInputChange.bind(_this);
+	      _this.handleSubmit.bind(_this);
+	      return _this;
+	   }
+	
+	   _createClass(PlaylistForm, [{
+	      key: 'onInputChange',
+	      value: function onInputChange(currentPlaylistName) {
+	         this.setState({
+	            currentPlaylistName: currentPlaylistName
+	         });
+	      }
+	   }, {
+	      key: 'handleSubmit',
+	      value: function handleSubmit(event) {
+	         event.preventDefault();
+	         var playlists = this.state.playlists.concat([(0, _PlaylistConstructor2.default)(this.state.currentPlaylistName)]);
+	         this.setState({ playlists: playlists });
+	      }
+	   }, {
+	      key: 'render',
+	      value: function render() {
+	         var _this2 = this;
+	
+	         return _react2.default.createElement(
+	            'div',
+	            { className: 'well' },
+	            _react2.default.createElement(
+	               'form',
+	               { className: 'form-horizontal', onSubmit: function onSubmit(event) {
+	                     return _this2.handleSubmit(event);
+	                  } },
+	               _react2.default.createElement(
+	                  'fieldset',
+	                  null,
+	                  _react2.default.createElement(
+	                     'legend',
+	                     null,
+	                     'New Playlist'
+	                  ),
+	                  _react2.default.createElement(
+	                     'div',
+	                     { className: 'form-group' },
+	                     _react2.default.createElement(
+	                        'label',
+	                        { className: 'col-xs-2 control-label' },
+	                        'Name'
+	                     ),
+	                     _react2.default.createElement(
+	                        'div',
+	                        { className: 'col-xs-10' },
+	                        _react2.default.createElement('input', { className: 'form-control', type: 'text', onChange: function onChange(event) {
+	                              return _this2.onInputChange(event.target.value);
+	                           } })
+	                     )
+	                  ),
+	                  _react2.default.createElement(
+	                     'div',
+	                     { className: 'form-group' },
+	                     _react2.default.createElement(
+	                        'div',
+	                        { className: 'col-xs-10 col-xs-offset-2' },
+	                        _react2.default.createElement(
+	                           'button',
+	                           { type: 'submit', className: 'btn btn-success' },
+	                           'Create Playlist'
+	                        )
+	                     )
+	                  )
+	               )
+	            ),
+	            this.state.playlists && this.state.playlists.map(function (playlist) {
+	               return console.log(playlist);
+	            })
+	         );
+	      }
+	   }]);
+	
+	   return PlaylistForm;
+	}(_react.Component);
+	
+	exports.default = PlaylistForm;
+
+/***/ },
+/* 299 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	exports.default = PlaylistConstructor;
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function PlaylistConstructor(playlistName) {
+	   return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	         'h3',
+	         null,
+	         this.state.playlistName
+	      )
+	   );
+	}
+
+/***/ },
+/* 300 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _PlaylistForm = __webpack_require__(298);
+	
+	var _PlaylistForm2 = _interopRequireDefault(_PlaylistForm);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Playlists = function (_React$Component) {
+	   _inherits(Playlists, _React$Component);
+	
+	   function Playlists() {
+	      _classCallCheck(this, Playlists);
+	
+	      return _possibleConstructorReturn(this, (Playlists.__proto__ || Object.getPrototypeOf(Playlists)).apply(this, arguments));
+	   }
+	
+	   _createClass(Playlists, [{
+	      key: 'render',
+	      value: function render() {
+	         return _react2.default.createElement(_PlaylistForm2.default, null);
+	      }
+	   }]);
+	
+	   return Playlists;
+	}(_react2.default.Component);
+	
+	exports.default = Playlists;
 
 /***/ }
 /******/ ]);
